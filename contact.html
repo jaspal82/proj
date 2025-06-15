@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Contact | Harmony Vastu</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fafafa;
+        }
+
+        .header-fake {
+            height: 80px;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            font-size: 1.8rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #2c3e50;
+            cursor: pointer;
+        }
+
+        .nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: 400;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav a:hover {
+            color: #e74c3c;
+        }
+
+        .nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #e74c3c;
+            transition: width 0.3s ease;
+        }
+
+        .nav a:hover::after {
+            width: 100%;
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            min-height: calc(100vh - 160px);
+        }
+
+        .contact-section {
+            background: white;
+            padding: 3rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .contact-section:hover {
+            transform: translateY(-5px);
+        }
+
+        .contact-section h2 {
+            color: #2c3e50;
+            font-size: 2rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .contact-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: #e74c3c;
+        }
+
+        .consultation-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .consultation-form label {
+            color: #2c3e50;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        .consultation-form input,
+        .consultation-form textarea {
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            background: #fafafa;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            border-radius: 0;
+        }
+
+        .consultation-form input:focus,
+        .consultation-form textarea:focus {
+            outline: none;
+            border-color: #e74c3c;
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.1);
+        }
+
+        .consultation-form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .consultation-form button {
+            padding: 1rem 2rem;
+            background: #2c3e50;
+            color: white;
+            border: none;
+            font-size: 1rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .consultation-form button:hover {
+            background: #34495e;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(44, 62, 80, 0.3);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-info p {
+            color: #666;
+            font-size: 1.1rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .contact-info p strong {
+            color: #2c3e50;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        .contact-info h3 {
+            color: #2c3e50;
+            font-weight: 400;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .social-links {
+            list-style: none;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .social-links li {
+            background: #fafafa;
+            border: 2px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+
+        .social-links li:hover {
+            border-color: #e74c3c;
+            transform: translateY(-2px);
+        }
+
+        .social-links a {
+            display: block;
+            padding: 0.8rem 1.5rem;
+            color: #2c3e50;
+            text-decoration: none;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #e74c3c;
+        }
+
+        .footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 1rem 2rem;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                display: none;
+            }
+
+            .nav.show {
+                display: flex;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+                padding: 2rem 1rem;
+                gap: 2rem;
+            }
+
+            .contact-section {
+                padding: 2rem;
+            }
+
+            .contact-section h2 {
+                font-size: 1.5rem;
+            }
+
+            .social-links {
+                flex-direction: column;
+            }
+
+            .social-links li {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 1rem;
+            }
+
+            .header h1 {
+                font-size: 1.5rem;
+            }
+
+            .contact-container {
+                padding: 1rem;
+            }
+
+            .contact-section {
+                padding: 1.5rem;
+            }
+
+            .consultation-form input,
+            .consultation-form textarea {
+                padding: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-fake"></div>
+    
+    <div class="header">
+        <h1>Harmony Vastu</h1>
+        <button onclick="hamburgerClick()" class="hamburger">&#9776;</button>
+        <div class="nav">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="index.html#services">Services</a>
+            <a href="index.html#testimonials">Testimonials</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </div>
+   
+    <main class="contact-container">
+        <div class="contact-section">
+            <h2>Book a Consultation</h2>
+            <form class="consultation-form">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" placeholder="Your Name" required>
+                
+                <label for="email">Email Address</label>
+                <input type="email" id="email" placeholder="you@example.com" required>
+                
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" placeholder="+91-XXXXXXXXXX" required>
+                
+                <label for="date">Preferred Date</label>
+                <input type="date" id="date" required>
+                
+                <label for="message">Message</label>
+                <textarea id="message" rows="4" placeholder="Brief about your query..."></textarea>
+                
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+        
+        <div class="contact-section">
+            <h2>Contact Us</h2>
+            <div class="contact-info">
+                <p><strong>Email:</strong> contact@harmonyvastu.com</p>
+                <p><strong>Phone:</strong> +91-9876543210</p>
+                <p><strong>Address:</strong> 123 Harmony Lane, Vastu Nagar, Delhi, India</p>
+                
+                <h3>Follow Us</h3>
+                <ul class="social-links">
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+    </main>
+   
+    <footer class="footer">
+        <p>&copy; 2025 Harmony Vastu. All rights reserved.</p>
+    </footer>
+   
+    <script>
+        function hamburgerClick(){
+            const nav = document.querySelector('.nav');
+            nav.classList.toggle('show');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Service Details</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fafafa;
+        }
+
+        .header-fake {
+            height: 80px;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            height: 80px;
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            font-size: 1.8rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #2c3e50;
+            cursor: pointer;
+        }
+
+        .nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: 400;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav a:hover {
+            color: #e74c3c;
+        }
+
+        .nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #e74c3c;
+            transition: width 0.3s ease;
+        }
+
+        .nav a:hover::after {
+            width: 100%;
+        }
+
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            min-height: calc(100vh - 200px);
+        }
+
+        .about-heading {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .about-heading h2 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            font-weight: 300;
+            position: relative;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .about-heading h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: #e74c3c;
+        }
+
+        .left {
+            background: white;
+            padding: 3rem;
+            border-radius: 0;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .left:hover {
+            transform: translateY(-2px);
+        }
+
+        .left > p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+            text-align: center;
+            font-style: italic;
+        }
+
+        .left h3 {
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            margin-top: 2.5rem;
+            font-weight: 400;
+            font-size: 1.3rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .left h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: #e74c3c;
+        }
+
+        .left h3:first-of-type {
+            margin-top: 1rem;
+        }
+
+        .left ul {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .left ul li {
+            padding: 0.8rem 0;
+            color: #666;
+            position: relative;
+            padding-left: 2rem;
+            transition: color 0.3s ease;
+            border-left: 2px solid transparent;
+            margin-left: 1rem;
+        }
+
+        .left ul li:hover {
+            color: #2c3e50;
+            border-left-color: #e74c3c;
+            background: rgba(231, 76, 60, 0.05);
+        }
+
+        .left ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #e74c3c;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+            margin-top: auto;
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                padding: 1rem 2rem;
+                box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+                display: none;
+                gap: 0;
+            }
+
+            .nav.show {
+                display: flex;
+            }
+
+            .nav a {
+                padding: 1rem 0;
+                border-bottom: 1px solid rgba(44, 62, 80, 0.1);
+            }
+
+            .nav a:last-child {
+                border-bottom: none;
+            }
+
+            .header h1 {
+                font-size: 1.5rem;
+            }
+
+            .main-container {
+                padding: 2rem 1rem;
+            }
+
+            .about-heading h2 {
+                font-size: 2rem;
+            }
+
+            .left {
+                padding: 2rem;
+            }
+
+            .left > p {
+                font-size: 1.1rem;
+            }
+
+            .left h3 {
+                font-size: 1.2rem;
+            }
+
+            .left ul li {
+                padding: 0.6rem 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 1rem;
+            }
+
+            .header h1 {
+                font-size: 1.3rem;
+                letter-spacing: 1px;
+            }
+
+            .about-heading h2 {
+                font-size: 1.8rem;
+            }
+
+            .left {
+                padding: 1.5rem;
+            }
+
+            .main-container {
+                padding: 1.5rem 0.5rem;
+            }
+        }
+
+        .nav a,
+        .left ul li,
+        .left {
+            transition: all 0.3s ease;
+        }
+
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .main-container {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .about-heading {
+            animation: fadeInUp 0.6s ease-out 0.2s both;
+        }
+
+        .left {
+            animation: fadeInUp 0.6s ease-out 0.4s both;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-fake"></div>
+    <div class="header">
+        <h1>Harmony Vastu</h1>
+        <button onclick="hamburgerClick()" class="hamburger">&#9776;</button>
+        <div class="nav">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="index.html#services">Services</a>
+            <a href="index.html#testimonials">Testimonials</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </div>
+
+    <main class="main-container">
+        <div class="about-heading">
+            <h2 id="service-title">Loading...</h2>
+        </div>
+
+        <div class="left" id="service-content">
+            
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Harmony Vastu. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function hamburgerClick() {
+            const nav = document.querySelector('.nav');
+            nav.classList.toggle('show');
+        }
+
+
+        document.querySelectorAll('.nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                const nav = document.querySelector('.nav');
+                nav.classList.remove('show');
+            });
+        });
+
+
+        document.addEventListener('click', (e) => {
+            const nav = document.querySelector('.nav');
+            const hamburger = document.querySelector('.hamburger');
+            
+            if (!nav.contains(e.target) && !hamburger.contains(e.target)) {
+                nav.classList.remove('show');
+            }
+        });
+    </script>
+    <script src="scripts/services.js"></script>
+</body>
+</html>

@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us | Harmony Vastu</title>
+  <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fafafa;
+        }
+
+        .header-fake {
+            height: 80px;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            font-size: 1.8rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #2c3e50;
+            cursor: pointer;
+        }
+
+        .nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: 400;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav a:hover {
+            color: #e74c3c;
+        }
+
+        .nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #e74c3c;
+            transition: width 0.3s ease;
+        }
+
+        .nav a:hover::after {
+            width: 100%;
+        }
+
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            min-height: calc(100vh - 160px);
+        }
+
+        .intro-section {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding: 3rem;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .intro-section:hover {
+            transform: translateY(-5px);
+        }
+
+        .intro-section h2 {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .intro-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: #e74c3c;
+        }
+
+        .intro-section p {
+            font-size: 1.2rem;
+            color: #666;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .mission-section,
+        .values-section,
+        .team-section {
+            margin-bottom: 3rem;
+            padding: 3rem;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+
+        .mission-section:hover,
+        .values-section:hover,
+        .team-section:hover {
+            transform: translateY(-5px);
+            border-left-color: #e74c3c;
+        }
+
+        .mission-section h3,
+        .values-section h3,
+        .team-section h3 {
+            color: #2c3e50;
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .mission-section h3::after,
+        .values-section h3::after,
+        .team-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: #e74c3c;
+        }
+
+        .mission-section p,
+        .team-section p {
+            color: #666;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .values-section ul {
+            list-style: none;
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .values-section ul li {
+            color: #666;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            padding: 1rem;
+            background: #fafafa;
+            border-left: 4px solid #e74c3c;
+            transition: all 0.3s ease;
+        }
+
+        .values-section ul li:hover {
+            background: #f0f0f0;
+            transform: translateX(5px);
+        }
+
+        .values-section ul li strong {
+            color: #2c3e50;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 1rem;
+        }
+
+        .footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 1rem 2rem;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                display: none;
+            }
+
+            .nav.show {
+                display: flex;
+            }
+
+            .about-container {
+                padding: 2rem 1rem;
+            }
+
+            .intro-section,
+            .mission-section,
+            .values-section,
+            .team-section {
+                padding: 2rem;
+            }
+
+            .intro-section h2 {
+                font-size: 2rem;
+            }
+
+            .mission-section h3,
+            .values-section h3,
+            .team-section h3 {
+                font-size: 1.5rem;
+            }
+
+            .intro-section p,
+            .mission-section p,
+            .team-section p {
+                font-size: 1rem;
+            }
+
+            .values-section ul li {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 1rem;
+            }
+
+            .header h1 {
+                font-size: 1.5rem;
+            }
+
+            .about-container {
+                padding: 1rem;
+            }
+
+            .intro-section,
+            .mission-section,
+            .values-section,
+            .team-section {
+                padding: 1.5rem;
+            }
+
+            .intro-section h2 {
+                font-size: 1.8rem;
+            }
+
+            .mission-section h3,
+            .values-section h3,
+            .team-section h3 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-fake"></div>
+    
+    <div class="header">
+        <h1>Harmony Vastu</h1>
+        <button onclick="hamburgerClick()" class="hamburger">&#9776;</button>
+        <div class="nav">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="index.html#services">Services</a>
+            <a href="index.html#testimonials">Testimonials</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </div>
+
+    <main class="about-container">
+        <section class="intro-section">
+            <h2>About Harmony Vastu</h2>
+            <p>At Harmony Vastu, we believe that your space has the power to influence your life. With a deep-rooted understanding of Vastu Shastra and modern needs, we strive to create harmonious environments that promote well-being, success, and spiritual balance.</p>
+        </section>
+
+        <section class="mission-section">
+            <h3>Our Mission</h3>
+            <p>To empower individuals and businesses by aligning their physical spaces with the principles of Vastu Shastra and holistic energy systems like Feng Shui. Our mission is to restore balance and bring peace, prosperity, and positivity into every home and workplace we touch.</p>
+        </section>
+
+        <section class="values-section">
+            <h3>Core Values</h3>
+            <ul>
+                <li><strong>Authenticity:</strong> We rely on traditional Vastu principles guided by centuries of wisdom.</li>
+                <li><strong>Integrity:</strong> Transparent consultations and ethical practices are the foundation of our service.</li>
+                <li><strong>Client-Centric:</strong> Every solution is tailored to your unique space and needs.</li>
+                <li><strong>Continuous Learning:</strong> We blend Vastu with modern methodologies for optimized results.</li>
+            </ul>
+        </section>
+
+        <section class="team-section">
+            <h3>Meet the Expert</h3>
+            <p>Led by experienced Vastu consultants with years of hands-on practice, Harmony Vastu offers personalized consultations, onsite evaluations, and educational programs. Our founder is a certified Vastu and Feng Shui practitioner, known for delivering results-driven insights.</p>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Harmony Vastu. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function hamburgerClick(){
+            const nav = document.querySelector('.nav');
+            nav.classList.toggle('show');
+        }
+    </script>
+</body>
+</html>

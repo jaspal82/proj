@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harmony Vastu - Modern Minimalist</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fafafa;
+        }
+
+        .hero-container {
+            min-height: 100vh;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            font-size: 1.8rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #2c3e50;
+            cursor: pointer;
+        }
+
+        .nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: 400;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav a:hover {
+            color: #e74c3c;
+        }
+
+        .nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #e74c3c;
+            transition: width 0.3s ease;
+        }
+
+        .nav a:hover::after {
+            width: 100%;
+        }
+
+        .intro {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            padding: 8rem 2rem 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .intro .text h2 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-weight: 300;
+            line-height: 1.2;
+        }
+
+        .intro .text p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .intro-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .consultation-button, .services-button {
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 0;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .consultation-button {
+            background: #2c3e50;
+            color: white;
+        }
+
+        .consultation-button:hover {
+            background: #34495e;
+            transform: translateY(-2px);
+        }
+
+        .services-button {
+            background: transparent;
+            color: #2c3e50;
+            border: 2px solid #2c3e50;
+        }
+
+        .services-button:hover {
+            background: #2c3e50;
+            color: white;
+        }
+
+        .image {
+            height: 400px;
+            background: url('/scripts/vastu1.jpg');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            border-radius: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .about-heading {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .about-heading h2 {
+            font-size: 2rem;
+            color: #2c3e50;
+            font-weight: 300;
+            position: relative;
+            display: inline-block;
+        }
+
+        .about-heading h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 2px;
+            background: #e74c3c;
+        }
+
+        .left h3, .right h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        .left p, .right p {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .left ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+        }
+
+        .left ul li {
+            padding: 0.5rem 0;
+            color: #2c3e50;
+            position: relative;
+            padding-left: 1rem;
+        }
+
+        .left ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        .services-container {
+            background: white;
+            padding: 4rem 2rem;
+        }
+
+        .services-container h2 {
+            text-align: center;
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .services > div {
+            background: #fafafa;
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+
+        .services > div:hover {
+            transform: translateY(-5px);
+            border-left-color: #e74c3c;
+        }
+
+        .services h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        .services a {
+            color: #e74c3c;
+            text-decoration: none;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .testimonials-container {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonials-heading h2 {
+            text-align: center;
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonials > div {
+            background: white;
+            padding: 2rem;
+            border-radius: 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .testimonials > div:hover {
+            transform: translateY(-5px);
+        }
+
+        .name h3 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+        }
+
+        .name p {
+            color: #e74c3c;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .review p {
+            color: #666;
+            font-style: italic;
+            line-height: 1.6;
+        }
+
+        .footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 1rem 2rem;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                display: none;
+            }
+
+            .nav.show {
+                display: flex;
+            }
+
+            .intro {
+                grid-template-columns: 1fr;
+                padding: 6rem 1rem 2rem;
+                gap: 2rem;
+            }
+
+            .intro .text h2 {
+                font-size: 2rem;
+            }
+
+            .intro-buttons {
+                flex-direction: column;
+            }
+
+            .main-container {
+                grid-template-columns: 1fr;
+                padding: 2rem 1rem;
+                gap: 2rem;
+            }
+
+            .services {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonials {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero-container">
+        <div class="header">
+            <h1>Harmony Vastu</h1>
+            <button onclick="hamburgerClick()" class="hamburger">&#9776;</button>
+            <div class="nav">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="#services">Services</a>
+                <a href="#testimonials">Testimonials</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </div>
+        <div class="intro">
+            <div class="text">
+                <h2>Transform Your Space with Ancient Vastu Wisdom</h2>
+                <p>Harmony Vastu provides expert consultancy to create balanced, 
+                    prosperous, and harmonious living and working environments.</p>
+                <div class="intro-buttons">
+                    <button onclick="location='contact.html'" class="consultation-button">Book a Consultation</button>
+                    <button onclick="location='#services'" class="services-button">Our Services</button>
+                </div>
+            </div>
+            <div class="image"></div>
+        </div>
+        <div class="main-container">
+            <div class="about-heading"><h2>About Harmony Vastu</h2></div>
+            <div class="left">
+                <h3>Ancient Science for Modern Living</h3>
+                <p>Vastu Shastra is an ancient Indian science of architecture and design that aims to create harmony between humans and nature. 
+                    At Harmony Vastu, we blend these time-tested principles with modern design aesthetics to create spaces that promote well-being, 
+                    prosperity, and positive energy.</p>
+                <p>With over 15 years of experience, our team of certified Vastu consultants has helped thousands
+                     of clients transform their homes and workplaces into balanced environments that support their
+                      goals and aspirations.</p>
+                <ul>
+                    <li>Certified Experts</li>
+                    <li>5000+ Happy Clients</li>
+                    <li>15+ Years Experience</li>
+                    <li>Personalized Solutions</li>
+                </ul>
+            </div>
+            <div class="right">
+                <h3>Our Mission</h3>
+                <p>To help individuals and businesses create harmonious environments that enhance well-being, 
+                    prosperity, and positive energy through authentic Vastu principles.</p>
+                <h3>Our Vision</h3>
+                <p>To be the most trusted name in Vastu consultancy,
+                     making ancient wisdom accessible and applicable to modern living spaces across the globe.</p>
+            </div>
+        </div>
+        <div class="services-container" id="services">
+            <h2>Our Services</h2>
+            <div class="services">
+                <div><h3>Residential Vastu</h3><a href="service.html?service=residential">Read More</a></div>
+                <div><h3>Commercial Vastu</h3><a href="service.html?service=commercial">Read More</a></div>
+                <div><h3>Vastu Remedies</h3><a href="service.html?service=remedies">Read More</a></div>
+                <div><h3>Vastu Consultation</h3><a href="service.html?service=consultation">Read More</a></div>
+                <div><h3>Feng Shui Integration</h3><a href="service.html?service=fengshui">Read More</a></div>
+                <div><h3>Vastu Education</h3><a href="service.html?service=education">Read More</a></div>
+            </div>
+        </div>
+
+        <div class="testimonials-container" id="testimonials">
+            <div class="testimonials-heading"><h2>Client Testimonials</h2></div>
+            <div class="testimonials">
+                <div>
+                    <div class="name">
+                        <h3>Rajesh Sharma</h3>
+                        <p>Business Owner</p>
+                    </div>
+                    <div class="review"><p>"After implementing the Vastu recommendations for my retail store, I noticed a significant increase in customer footfall and sales. The team at Harmony Vastu was professional, knowledgeable, and provided practical solutions that were easy to implement."</p></div>
+                </div>
+                <div>
+                    <div class="name">
+                        <h3>Anita Patel</h3>
+                        <p>HomeOwner</p>
+                    </div>
+                    <div class="review"><p>"We consulted Harmony Vastu before building our new home, and it was the best decision we made. Their pre-construction consultation helped us design a home that not only looks beautiful but also feels harmonious and peaceful. Our family has been thriving in this positive environment."</p></div>
+                </div>
+                <div>
+                    <div class="name">
+                        <h3>Vikram Kumar</h3>
+                        <p>CEO, Tech Solutions</p>
+                    </div>
+                    <div class="review"><p>"I was skeptical about Vastu at first, but the results speak for themselves. After redesigning our office layout according to Harmony Vastu's recommendations, employee productivity improved, and we've seen a 30% growth in business. Their commercial Vastu expertise is truly remarkable."</p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <p>&copy; 2025 Harmony Vastu. All rights reserved.</p>
+    </footer>
+    <script>
+        function hamburgerClick(){
+            const nav = document.querySelector('.nav');
+            nav.classList.toggle('show');
+        }
+    </script>
+</body>
+</html>
